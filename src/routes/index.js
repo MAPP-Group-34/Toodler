@@ -7,6 +7,6 @@ import Boards from '../views/Boards';
 
 
 export default createAppContainer(createStackNavigator({
-    Main,
-    Boards
+  Main,
+  Boards
 }));
