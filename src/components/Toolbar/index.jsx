@@ -17,7 +17,7 @@ const Toolbar = ({ onAdd, onRemove }) => (
 Toolbar.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  hasSelectedImages: PropTypes.bool.isRequired
-}
+  hasSelectedImages: PropTypes.bool.isRequired,
+};
 
 export default Toolbar;

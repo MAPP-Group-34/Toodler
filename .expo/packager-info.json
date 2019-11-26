@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19004,
-  "packagerPid": 27001,
-  "expoServerNgrokUrl": "https://yy-egm.anonymous.toodler.exp.direct",
-  "packagerNgrokUrl": "https://packager.yy-egm.anonymous.toodler.exp.direct",
-  "ngrokPid": 27029
+  "packagerPort": 19005,
+  "packagerPid": 21441,
+  "expoServerNgrokUrl": "https://5d-rrs.anonymous.toodler.exp.direct",
+  "packagerNgrokUrl": "https://packager.5d-rrs.anonymous.toodler.exp.direct",
+  "ngrokPid": 21468
 }

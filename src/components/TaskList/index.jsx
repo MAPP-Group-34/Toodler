@@ -1,4 +1,4 @@
-iintegrationmport React from 'react';
+import React from 'react';
 import { View, FlatList } from 'react-native';
 import TaskItem from '../TaskItem';
 import styles from './styles';
@@ -6,7 +6,7 @@ import styles from './styles';
 const TaskList = ({ tasks }) => (
   <View style={styles.listContainer}>
     <FlatList
-      numColumns={3}
+      numColumns={1}
       data={tasks}
       //extraData={selectedTask}
       renderItem={({ item: { id, name, isFinished, description } }) => {

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   listContainer: {
-    flex: 1,
+    flex: 3,
   },
   listItem: {
     marginTop: 20,

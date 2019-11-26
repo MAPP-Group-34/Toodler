@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, Image, TouchableHighlight } from 'react-native';
+import {
+  View, Text, Image, TouchableHighlight,
+} from 'react-native';
 import logo from '../../resources/baby.png';
 import styles from './styles';
 
