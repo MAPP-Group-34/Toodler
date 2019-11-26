@@ -4,12 +4,12 @@ import Toolbar from '../../components/Toolbar';
 
 class Boards extends React.Component {
   render() {
-    return(
+    return (
       <View style={{ flex: 1 }}>
         <Toolbar />
       </View>
-    )
+    );
   }
-};
+}
 
 export default Boards;

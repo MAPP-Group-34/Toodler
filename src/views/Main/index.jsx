@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  View, Text, Image, TouchableHighlight
+  View, Text, Image, TouchableHighlight,
 } from 'react-native';
 import logo from '../../resources/baby.png';
 import styles from './Styles';
 
-const Main = ({navigation: { navigate } }) => (
+const Main = ({ navigation: { navigate } }) => (
   <View style={styles.container}>
     <Image style={styles.logo} source={logo} />
     <Text style={styles.paragraph}>Toodler A Kanban Project management tool</Text>

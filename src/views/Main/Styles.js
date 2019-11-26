@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {graniteGray} from '../../styles/colors';
+import { StyleSheet } from 'react-native';
+import graniteGray from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
