@@ -3,7 +3,7 @@ import {
   View, Text, Image, TouchableHighlight,
 } from 'react-native';
 import logo from '../../resources/baby.png';
-import styles from './Styles';
+import styles from './styles';
 
 const Main = ({ navigation: { navigate } }) => (
   <View style={styles.container}>
@@ -15,6 +15,14 @@ const Main = ({ navigation: { navigate } }) => (
     >
       <Text style={styles.buttonText}>Boards</Text>
     </TouchableHighlight>
+    <Text> Hi </Text>
+    <TouchableHighlight
+      style={styles.button}
+      onPress={() => { navigate('TaskTest'); }}
+    >
+      <Text style={styles.buttonText}>TaskTests</Text>
+    </TouchableHighlight>
+    <Image style={styles.logo} source={logo} />
   </View>
 );
 
