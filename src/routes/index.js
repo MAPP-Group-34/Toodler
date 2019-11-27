@@ -4,9 +4,10 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Main from '../views/Main';
 import Boards from '../views/Boards';
-
+import TaskTest from '../views/TaskTest';
 
 export default createAppContainer(createStackNavigator({
-    Main,
-    Boards
+  Main,
+  Boards,
+  TaskTest,
 }));

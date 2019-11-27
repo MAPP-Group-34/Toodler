@@ -74,8 +74,12 @@ class Boards extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     const{ selectedBoards, boards, isAddModalOpen, name, url} = this.state;
     return(
+=======
+    return (
+>>>>>>> c26f9ddadf4fab56f1afb6f39c859fa61e70252f
       <View style={{ flex: 1 }}>
         <Toolbar
           onAdd={ () => this.setState({ isAddModalOpen: true }) }
@@ -93,8 +97,8 @@ class Boards extends React.Component {
               selectFromCameraRoll={ () => this.selectFromCameraRoll() }
               />
       </View>
-    )
+    );
   }
-};
+}
 
 export default Boards;
