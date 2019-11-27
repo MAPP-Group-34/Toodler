@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { graniteGray } from '../../styles/colors';
+import { pinkish } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: graniteGray,
+    backgroundColor: pinkish,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     paddingRight: 20,
     borderColor: 'white',
     borderWidth: 2,
-    backgroundColor: graniteGray,
+    backgroundColor: pinkish,
   },
   buttonText: {
     color: 'white',

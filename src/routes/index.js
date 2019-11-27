@@ -10,4 +10,9 @@ export default createAppContainer(createStackNavigator({
   Main,
   Boards,
   TaskTest,
+},
+{
+  defaultNavigationOptions: {
+    header: null,
+  },
 }));

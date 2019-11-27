@@ -32,7 +32,7 @@ BoardList.propTypes = {
     thumbnailPhoto: PropTypes.string.isRequired
   })).isRequired,
   onLongPress: PropTypes.func.isRequired,
-  selectedImages: PropTypes.arrayOf(PropTypes.string).isRequired
+  selectedBoards: PropTypes.arrayOf(PropTypes.number).isRequired
 }
 
 export default BoardList;
