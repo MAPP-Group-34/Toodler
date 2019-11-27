@@ -1,9 +1,9 @@
 {
+  "packagerPort": 19001,
+  "packagerPid": 52640,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://in-rqf.anonymous.toodler.exp.direct",
-  "packagerNgrokUrl": "https://packager.in-rqf.anonymous.toodler.exp.direct",
-  "ngrokPid": 23900
+  "expoServerNgrokUrl": "https://ku-e7c.anonymous.toodler.exp.direct",
+  "packagerNgrokUrl": "https://packager.ku-e7c.anonymous.toodler.exp.direct",
+  "ngrokPid": 16528
 }
