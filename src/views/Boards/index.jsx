@@ -22,7 +22,7 @@ class Boards extends React.Component {
     this.setState({ boards: data.boards});
   }
 
-  onBoardLongPress(id){
+  onBoardLongPress(id) {
     const { selectedBoards, boards } = this.state;
     if (selectedBoards.indexOf(id) !== -1) {
       //the image is already within the list
