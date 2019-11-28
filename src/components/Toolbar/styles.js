@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { darkerBlue } from '../../styles/colors';
+import { purpleish } from '../../styles/colors';
 
 export default StyleSheet.create({
   toolbar: {
@@ -7,7 +7,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 80,
-    backgroundColor: darkerBlue,
+    backgroundColor: purpleish,
   },
   toolbarAction: {
     flex: 1,

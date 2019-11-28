@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight, TextInput, Text } from 'react-native';
+import { TouchableHighlight, TextInput, Text, CheckBox } from 'react-native';
 import Modal from '../Modal';
 import styles from './styles';
 
@@ -8,10 +8,11 @@ class AddBoardModal extends React.Component {
   state = {
     name: '',
     description: '',
+    isFinished: false,
   }
 
   render() {
-    const { name, description } = this.state;
+    const { name, description, isFinished } = this.state;
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -25,9 +26,14 @@ class AddBoardModal extends React.Component {
           onChangeText={(text) => this.setState({description: text})}
           placeholder="My Task description"
         />
+        <CheckBox
+          style={styles.checkboc}
+          checked={this.state.isFinished}
+          onPress={() => this.setState({checked: !this.state.isFinished})}
+        />
         <TouchableHighlight
           style={styles.button}
-          onPress={() => {this.props.onSubmit(name, description); }}
+          onPress={() => {this.props.onSubmit(name, description, isFinished); }}
         >
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>

@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
 import BoardList from '../../components/BoardList';
 import AddModal from '../../components/AddBoardModal';
-import { getAllBoards, remove, addBoard } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import data from '../../resources/data.json';
 
@@ -25,16 +24,28 @@ class Boards extends React.Component {
   onBoardLongPress(id) {
     const { selectedBoards, boards } = this.state;
     if (selectedBoards.indexOf(id) !== -1) {
-      //the image is already within the list
+      //the board is already within the list
       this.setState({
         selectedBoards: selectedBoards.filter(board => board !== id)
       });
     } else {
-      // the image needs to be added
+      // the board needs to be added
       this.setState({
         selectedBoards: [ ...selectedBoards, id ]
       });
     }
+    console.log(this.state);
+  }
+
+  async deleteSelectedBoards() {
+    const { selectedBoards, boards } = this.state;
+    this.setState({ loadingBoards: true })
+    this.setState({
+        selectedBoards: [],
+        // Only retrieve boards which were NOT part of the selected boards list
+        boards: boards.filter(board => selectedBoards.indexOf(board.id) === -1),
+        loadingBoards: false
+    });
   }
 
   async takePhoto() {
@@ -79,7 +90,8 @@ class Boards extends React.Component {
       <View style={{ flex: 1 }}>
         <Toolbar
           onAdd={ () => this.setState({ isAddModalOpen: true }) }
-          hasSelectedBoards={selectedBoards.length > 0}/>
+          onRemove={() => this.deleteSelectedBoards()}
+          hasSelected={selectedBoards.length > 0}/>
         { this.displayCaption() }
         <BoardList
           onLongPress={(id) => this.onBoardLongPress(id)}

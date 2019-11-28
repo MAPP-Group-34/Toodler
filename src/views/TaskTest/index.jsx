@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 import Taskbar from '../../components/TaskBar';
 import TaskList from '../../components/TaskList';
 import data from '../../resources/data.json';
@@ -10,14 +11,19 @@ class Tasks extends React.Component {
   state = {
     tasks: [],
     selectedTasks: [],
-    loadingData: false,
     isAddModalOpen: false,
     isEditModalOpen: false,
+    currentList: 1,
+  }
+
+  async componentDidMount() {
+    const iTasks = data.tasks;
+    this.setState({ tasks: iTasks });
   }
 
 
-  onImageLongPress(id) {
-    const { selectedTasks } = this.props.state;
+  onTaskLongPress(id) {
+    const { selectedTasks } = this.state;
     if (selectedTasks.indexOf(id) !== -1) {
       // The image is already within the list
       this.setState({ selectedTasks: selectedTasks.filter((task) => task !== id) });
@@ -25,29 +31,50 @@ class Tasks extends React.Component {
       // Add the new image
       this.setState({ selectedTasks: [...selectedTasks, id] });
     }
+
   }
 
-  async fetchItems() {
-    this.setState({ loadingData: true });
-    const tasks = data.tasks;
-    this.setState({ loadingData: false, tasks });
+  getNewId() {
+    const { tasks } = this.state;
+    const newId = 0;
+    const currentTail = tasks.length;
+    const lastElement = tasks[currentTail - 1].id;
+    if (lastElement > newId) {
+      return lastElement + 1;
+    }
+    return 0;
   }
 
-  async addBoard(name) {
+  async addTask(name, description, isFinished) {
     const {
-      isAddModalOpen,
       tasks,
-      id,
-      description,
       currentList,
+      isAddModalOpen,
     } = this.state;
-    const newId = id + 1;
+    const newId = this.getNewId();
     const newTask = {
       id: newId,
       name,
       description,
+      isFinished,
+      listId: currentList,
     };
-    this.setState({ tasks: [...tasks, newTask], isAddModalOpen: false, id: newId });
+    this.setState({ tasks: [...tasks, newTask], isAddModalOpen: false });
+  }
+
+  async deleteSelected() {
+    const { selectedTasks, tasks } = this.state;
+    this.setState({
+      selectedTasks: [],
+      // Only retrieve boards which were NOT part of the selected boards list
+      tasks: tasks.filter((task) => selectedTasks.indexOf(task.id) === -1),
+    });
+  }
+
+  async editSelected(name, description, isFinished) {
+    await this.addTask(name, description, isFinished);
+    await this.deleteSelected();
+    this.setState({ isEditModalOpen: false });
   }
 
   render() {
@@ -58,6 +85,7 @@ class Tasks extends React.Component {
       isAddModalOpen,
       isEditModalOpen,
     } = this.state;
+    //console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <Taskbar
@@ -68,16 +96,18 @@ class Tasks extends React.Component {
         />
         <TaskList
           tasks={tasks}
-          masterTaskId={1}
-          onLongPress={(id) => this.onBoardLongPress(id)}
+          masterListId={currentList}
+          selectedTasks={selectedTasks}
+          onLongPress={(id) => this.onTaskLongPress(id)}
         />
         <AddModal
           isOpen={isAddModalOpen}
-          onSubmit={ (name, description) => this.addBoard(name) }
+          onSubmit={(name, description, isFinished) => this.addTask(name, description, isFinished)}
           closeModal={() => this.setState({ isAddModalOpen: false })}
         />
-        <EditModal
+        <AddModal
           isOpen={isEditModalOpen}
+          onSubmit={(name, description, isFinished) => this.editSelected(name, description, isFinished)}
           closeModal={() => this.setState({ isEditModalOpen: false })}
         />
       </View>
@@ -85,4 +115,13 @@ class Tasks extends React.Component {
   }
 }
 
+Tasks.propTypes = {
+  tasks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    listId: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    isFinished: PropTypes.bool.isRequired,
+  })).isRequired,
+};
 export default Tasks;

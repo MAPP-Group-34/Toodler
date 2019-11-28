@@ -15,4 +15,10 @@ export default StyleSheet.create({
     marginTop: 20,
     width: 1000,
   },
+  checkmark: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+    fontSize: 16,
+  },
 });
