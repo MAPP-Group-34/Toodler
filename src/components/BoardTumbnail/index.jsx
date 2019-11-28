@@ -6,7 +6,9 @@ import styles from './styles';
 
 const BoardThumbnail = ({ id, name, thumbnailPhoto, onLongPress, isSelected, navigation: { navigate } }) => (
   <TouchableOpacity
-    onLongPress={() => onLongPress(id)}>
+    onLongPress={() => onLongPress(id)}
+    onPress={ () => navigate('Lists', { selectedBoardId: id })}
+  >
     {
       isSelected
       ?
