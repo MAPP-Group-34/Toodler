@@ -27,7 +27,7 @@ class AddBoardModal extends React.Component {
           placeholder="My Task description"
         />
         <CheckBox
-          style={styles.checkboc}
+          style={styles.checkbox}
           checked={this.state.isFinished}
           onPress={() => this.setState({checked: !this.state.isFinished})}
         />

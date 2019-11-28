@@ -1,13 +1,4 @@
 {
-<<<<<<< HEAD
-  "packagerPort": null,
-  "packagerPid": null,
-  "devToolsPort": 19002,
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
-=======
   "packagerPort": 19001,
   "packagerPid": 173360,
   "devToolsPort": 19002,
@@ -15,5 +6,4 @@
   "expoServerNgrokUrl": "https://we-76s.anonymous.toodler.exp.direct",
   "packagerNgrokUrl": "https://packager.we-76s.anonymous.toodler.exp.direct",
   "ngrokPid": 173484
->>>>>>> a368a56bec1c074a640ca611ec9801a919c8ab56
 }
