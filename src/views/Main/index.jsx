@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import logo from '../../resources/baby.png';
 import styles from './styles';
+import { connect } from 'react-redux';
 
 const Main = ({ navigation: { navigate } }) => (
   <View style={styles.container}>
@@ -26,4 +27,4 @@ const Main = ({ navigation: { navigate } }) => (
   </View>
 );
 
-export default Main;
+export default connect()(Main);

@@ -5,6 +5,8 @@ import BoardList from '../../components/BoardList';
 import AddModal from '../../components/AddBoardModal';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import data from '../../resources/data.json';
+import { addBoard } from '../../actions/boardActions';
+import { connect } from 'react-redux';
 
 class Boards extends React.Component {
 
@@ -13,12 +15,15 @@ class Boards extends React.Component {
     isAddModalOpen: false,
     selectedBoards: [],
     loadingBoards: false,
-    id: 4,
+    id: 3,
     thumbnailPhoto: '',
   }
 
-  async componentDidMount() {
-    this.setState({ boards: data.boards});
+  async componentDidMount(){
+    const { boards } = this.state;
+    if( boards.length === 0){
+      this.setState({ boards: data.boards});
+    }
   }
 
   onBoardLongPress(id){
@@ -34,7 +39,6 @@ class Boards extends React.Component {
         selectedBoards: [ ...selectedBoards, id ]
       });
     }
-    console.log(this.state);
   }
 
   async deleteSelectedBoards() {
@@ -60,17 +64,18 @@ class Boards extends React.Component {
 
   async addBoard(name) {
     const{isAddModalOpen, boards, id, thumbnailPhoto} = this.state;
+    const{addBoard} = this.props;
     const newId = id + 1;
     const newBoard = {"id": newId,
                       "name": name,
                       "thumbnailPhoto": thumbnailPhoto,};
     this.setState({ boards: [ ...boards, newBoard],isAddModalOpen: false, id: newId});
+    addBoard(newId, name, thumbnailPhoto);
   }
 
   displayCaption() {
-    const { selectedBoards } = this.state;
+    const { selectedBoards, boards } = this.state;
     if (selectedBoards.length === 0) { return; }
-
     let itemCaption = 'boards';
     if (selectedBoards.length === 1) {
       itemCaption = 'boards';
@@ -95,7 +100,7 @@ class Boards extends React.Component {
         { this.displayCaption() }
         <BoardList
           onLongPress={(id) => this.onBoardLongPress(id)}
-          boards={boards}
+          // boards={boards}
           selectedBoards={selectedBoards}/>
           <AddModal
               isOpen={ isAddModalOpen }
@@ -109,4 +114,4 @@ class Boards extends React.Component {
   }
 }
 
-export default Boards;
+export default connect(null, { addBoard })(Boards);

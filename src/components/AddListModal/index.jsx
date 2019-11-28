@@ -1,17 +1,17 @@
 import React from 'react';
 import { TouchableHighlight, TextInput, Text, TouchableOpacity, View } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
 import Modal from '../Modal';
 import styles from './styles';
 
 
-class AddBoardModal extends React.Component{
+class AddListModal extends React.Component{
   state = {
     name: '',
+    color: '',
   }
 
   render(){
-    const{ name} = this.state;
+    const{ name, color } = this.state;
     return(
       <Modal
         isOpen={this.props.isOpen}
@@ -25,18 +25,15 @@ class AddBoardModal extends React.Component{
           maxLength={29}
           style = {styles.input}
           />
-        <View
-          style = {styles.icons}>
-          <TouchableOpacity onPress={() => this.props.takePhoto()}>
-            <Entypo style = {styles.icon} name="camera"/>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.selectFromCameraRoll()}>
-            <Entypo style = {styles.icon} name="image"/>
-          </TouchableOpacity>
-        </View>
+        <TextInput
+          onChangeText={(text) => this.setState({color: text})}
+          placeholder="#123abc"
+          maxLength={7}
+          style = {styles.input}
+          />
         <TouchableHighlight
           style={ styles.button }
-          onPress={ () => {this.props.onSubmit(name)} }>
+          onPress={ () => {this.props.onSubmit(name, color)} }>
           <Text style={ styles.buttonText }>Submit</Text>
         </TouchableHighlight>
       </Modal>
@@ -44,4 +41,4 @@ class AddBoardModal extends React.Component{
   }
 }
 
-export default AddBoardModal;
+export default AddListModal;

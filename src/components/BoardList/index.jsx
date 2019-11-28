@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
 import BoardThumbnail from '../BoardTumbnail';
+import { connect } from 'react-redux';
 import styles from './styles';
 
 const BoardList = ({ boards, onLongPress, selectedBoards }) => (
@@ -11,15 +12,13 @@ const BoardList = ({ boards, onLongPress, selectedBoards }) => (
       data={boards}
       extraData={selectedBoards}
       renderItem={({ item: { id, name, thumbnailPhoto }}) =>
-        return (
-          <BoardThumbnail
-              id={id}
-              name={name}
-              thumbnailPhoto={thumbnailPhoto}
-              onLongPress={onLongPress}
-              isSelected={selectedBoards.indexOf(id) !== -1}
-          />
-        );
+        <BoardThumbnail
+            id={id}
+            name={name}
+            thumbnailPhoto={thumbnailPhoto}
+            onLongPress={onLongPress}
+            isSelected={selectedBoards.indexOf(id) !== -1}
+        />
       }
       keyExtractor={(boards) => boards.id}
     />
@@ -36,4 +35,8 @@ BoardList.propTypes = {
   selectedBoards: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
-export default BoardList;
+const mapStateToProps = state => ({
+  boards: state.boards
+})
+
+export default connect(mapStateToProps)(BoardList);
