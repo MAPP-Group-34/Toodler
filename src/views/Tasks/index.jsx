@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Taskbar from '../../components/TaskBar';
 import TaskList from '../../components/TaskList';
 import AddModal from '../../components/AddTaskModal';
-import EditModal from '../../components/EditTaskModal';
 import { addTask, removeTask } from '../../actions/taskActions';
 
 class Tasks extends React.Component {
@@ -14,7 +13,6 @@ class Tasks extends React.Component {
     const { navigation } = this.props;
     const selectedListId = navigation.getParam('selectedListId', -1);
     this.state = {
-      tasks: [],
       selectedTasks: [],
       isAddModalOpen: false,
       isEditModalOpen: false,
@@ -35,15 +33,15 @@ class Tasks extends React.Component {
 
   async addTask(name, description, isFinished) {
     const { selectedListId } = this.state;
-    const { addTask } = this.props;
-    addTask(name, description, isFinished, selectedListId);
+    const { addTaskToState } = this.props;
+    addTaskToState(name, description, isFinished, selectedListId);
     this.setState({ isAddModalOpen: false });
   }
 
   async deleteSelected() {
-    const { removeTask } = this.props;
+    const { removeTaskFromState } = this.props;
     const { selectedTasks } = this.state;
-    removeTask(selectedTasks);
+    removeTaskFromState(selectedTasks);
     this.setState({
       selectedTasks: [],
     });
@@ -108,11 +106,11 @@ class Tasks extends React.Component {
 }
 
 Tasks.propTypes = {
-  addTask: PropTypes.func.isRequired,
-  removeTask: PropTypes.func.isRequired,
+  addTaskToState: PropTypes.func.isRequired,
+  removeTaskFromState: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
   }).isRequired,
 };
-export default connect(null, { addTask, removeTask })(Tasks);
+export default connect(null, { addTaskToState: addTask, removeTaskFromState: removeTask })(Tasks);

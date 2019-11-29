@@ -43,7 +43,13 @@ class AddListModal extends React.Component {
         />
         <TouchableHighlight
           style={styles.button}
-          onPress={() => { onSubmit(name, color); }}
+          onPress={() => {
+            this.setState({
+              name: '',
+              color: '',
+            });
+            onSubmit(name, color);
+          }}
         >
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
