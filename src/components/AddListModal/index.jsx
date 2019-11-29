@@ -3,7 +3,9 @@ import {
   TouchableHighlight, TextInput, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { ColorPicker } from 'react-native-color-picker';
 import Modal from '../Modal';
+import { ExampleControlledVertical } from '../ColorPicker';
 import styles from './styles';
 
 
@@ -14,6 +16,11 @@ class AddListModal extends React.Component {
       name: '',
       color: '',
     };
+    this.onColorChange = this.onColorChange.bind(this);
+  }
+
+  onColorChange(color) {
+    this.setState({ color });
   }
 
   render() {
@@ -35,11 +42,9 @@ class AddListModal extends React.Component {
           maxLength={29}
           style={styles.input}
         />
-        <TextInput
-          onChangeText={(text) => this.setState({ color: text })}
-          placeholder="#123abc"
-          maxLength={7}
-          style={styles.input}
+        <ExampleControlledVertical
+          style={{ height: 100, widht: 100 }}
+          onColorChange={this.onColorChange}
         />
         <TouchableHighlight
           style={styles.button}
@@ -59,3 +64,19 @@ AddListModal.propTypes = {
 };
 
 export default AddListModal;
+
+// <TextInput
+//   onChangeText={(text) => this.setState({ color: text })}
+//   placeholder="#123abc"
+//   maxLength={7}
+//   style={styles.input}
+// />
+
+// <ColorPicker
+//   defaultColor={'#ffaabb'}
+//   color={color}
+//   style={{ width: 50, height: 50 }}
+//   hideSlider
+// />
+
+//<ExampleControlledVertical style={{ height: 50, widht: 50 }} />

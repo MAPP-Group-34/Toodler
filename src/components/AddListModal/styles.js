@@ -6,6 +6,7 @@ export default StyleSheet.create({
     borderColor: pinkish,
     borderWidth: 2,
     width: 200,
+    margin: 20,
     textAlign: 'center',
   },
   button: {
@@ -18,7 +19,7 @@ export default StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: 16,
     textAlign: 'center',
   },
 });
