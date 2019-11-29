@@ -61,7 +61,7 @@ class Boards extends React.Component {
 
   displayCaption() {
     const { selectedBoards } = this.state;
-    if (selectedBoards.length !== 0) { return null; }
+    if (selectedBoards.length === 0) { return null; }
     let itemCaption = 'boards';
     if (selectedBoards.length === 1) {
       itemCaption = 'board';

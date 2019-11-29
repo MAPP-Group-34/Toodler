@@ -34,6 +34,8 @@ TaskItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   isFinished: PropTypes.bool.isRequired,
+  onLongPress: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
 
 

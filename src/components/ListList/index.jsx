@@ -27,7 +27,7 @@ const ListList = ({
           isSelected={selectedLists.indexOf(id) !== -1}
         />
       )}
-      keyExtractor={() => lists.id}
+      keyExtractor={(list) => list.id}
     />
   </View>
 );

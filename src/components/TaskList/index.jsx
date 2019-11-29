@@ -39,7 +39,7 @@ const TaskList = ({
           )
           : <></>
       )}
-      keyExtractor={(task) => task.id}
+      keyExtractor={(task) => task.id.toString()}
     />
   </View>
 );
@@ -56,9 +56,9 @@ TaskList.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     isFinished: PropTypes.bool.isRequired,
-  })),
+  })).isRequired,
   onLongPress: PropTypes.func.isRequired,
-  selectedTasks: PropTypes.number,
+  selectedTasks: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default connect(mapStateToProps)(TaskList);
