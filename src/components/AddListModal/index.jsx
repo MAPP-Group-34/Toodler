@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  TouchableHighlight, TextInput, Text,
+  TouchableHighlight, TextInput, Text, Picker, View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { ColorPicker } from 'react-native-color-picker';
 import Modal from '../Modal';
-import { ExampleControlledVertical } from '../ColorPicker';
 import styles from './styles';
 
 
@@ -42,10 +40,28 @@ class AddListModal extends React.Component {
           maxLength={29}
           style={styles.input}
         />
-        <ExampleControlledVertical
-          style={{ height: 100, widht: 100 }}
-          onColorChange={this.onColorChange}
-        />
+        <View style={{ flexDirection: 'row' }}>
+          <Picker
+            selectedValue={color}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue) => this.setState({ color: itemValue })}
+          >
+            <Picker.Item label="White" value="#FFFFFF" />
+            <Picker.Item label="Gray" value="#808080" />
+            <Picker.Item label="Black" value="#000000" />
+            <Picker.Item label="Red" value="#FF0000" />
+            <Picker.Item label="Maroon" value="#800000" />
+            <Picker.Item label="Yellow" value="#FFFF00" />
+            <Picker.Item label="Lime" value="#00FF00" />
+            <Picker.Item label="Green" value="#008000" />
+            <Picker.Item label="Aqua" value="#00FFFF" />
+            <Picker.Item label="Blue" value="#0000FF" />
+            <Picker.Item label="Navy" value="#000080" />
+            <Picker.Item label="Fuchsia" value="#FF00FF" />
+            <Picker.Item label="Purple" value="#800080" />
+          </Picker>
+          <View style={{ height: 50, width: 50, backgroundColor: color }} />
+        </View>
         <TouchableHighlight
           style={styles.button}
           onPress={() => {
@@ -70,19 +86,3 @@ AddListModal.propTypes = {
 };
 
 export default AddListModal;
-
-// <TextInput
-//   onChangeText={(text) => this.setState({ color: text })}
-//   placeholder="#123abc"
-//   maxLength={7}
-//   style={styles.input}
-// />
-
-// <ColorPicker
-//   defaultColor={'#ffaabb'}
-//   color={color}
-//   style={{ width: 50, height: 50 }}
-//   hideSlider
-// />
-
-//<ExampleControlledVertical style={{ height: 50, widht: 50 }} />
