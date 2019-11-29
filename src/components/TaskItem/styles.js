@@ -7,4 +7,18 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#cbd2d9',
   },
+  viewContents: {
+    flex: 3,
+    flexDirection: 'row',
+  },
+  taskDescription: {
+    marginTop: 20,
+    width: 1000,
+  },
+  checkmark: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+    fontSize: 16,
+  },
 });

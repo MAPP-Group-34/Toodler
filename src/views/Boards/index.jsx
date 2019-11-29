@@ -27,8 +27,13 @@ class Boards extends React.Component {
     // }
   }
 
+<<<<<<< HEAD
   onBoardLongPress(id){
     const { selectedBoards } = this.state;
+=======
+  onBoardLongPress(id) {
+    const { selectedBoards, boards } = this.state;
+>>>>>>> 0cb70eefafba18c036c25d92c4c3d70a9ba3dbd5
     if (selectedBoards.indexOf(id) !== -1) {
       //the board is already within the list
       this.setState({
