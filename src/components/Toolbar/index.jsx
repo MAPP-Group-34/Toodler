@@ -14,7 +14,8 @@ const Toolbar = ({ onAdd, onRemove, hasSelected }) => (
       disabled={!hasSelected}
     >
       <Text style={[styles.toolbarActionText, hasSelected ? {}
-        : { color: 'rgba(155, 155, 155, 0.5)' }]}>
+        : { color: 'rgba(155, 155, 155, 0.5)' }]}
+      >
         Delete
       </Text>
     </TouchableHighlight>
@@ -24,7 +25,7 @@ const Toolbar = ({ onAdd, onRemove, hasSelected }) => (
 Toolbar.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  hasSelected: PropTypes.bool.isRequired
-}
+  hasSelected: PropTypes.bool.isRequired,
+};
 
 export default Toolbar;

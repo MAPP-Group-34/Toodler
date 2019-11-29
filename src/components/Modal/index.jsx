@@ -10,22 +10,22 @@ const Modal = (
     closeModal,
     title,
     children,
-  }
-) =>(
-    <NativeModal
-      isVisible={isOpen}
-      hasBackdrop={true}
-      onBackButtonPress={closeModal}
-      onSwipeComplete={closeModal}
-      onBackdropPress={closeModal}
-      swipeDirection={['up', 'down']}
-      style={styles.modal}
-    >
-  <View style={styles.body}>
+  },
+) => (
+  <NativeModal
+    isVisible={isOpen}
+    hasBackdrop
+    onBackButtonPress={closeModal}
+    onSwipeComplete={closeModal}
+    onBackdropPress={closeModal}
+    swipeDirection={['up', 'down']}
+    style={styles.modal}
+  >
+    <View style={styles.body}>
       <Text>{title}</Text>
       {children}
-  </View>
-    </NativeModal>
+    </View>
+  </NativeModal>
 );
 
 Modal.propTypes = {

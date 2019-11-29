@@ -5,9 +5,12 @@ import styles from './styles';
 
 
 class EditTaskModal extends React.Component {
-  state = {
-    name: '',
-    description: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      description: '',
+    };
   }
 
   render() {

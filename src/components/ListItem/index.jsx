@@ -3,7 +3,7 @@ import { withNavigation } from 'react-navigation';
 import {
   View, TouchableOpacity, Text,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 import styles from './styles';
 
 const ListItem = ({
@@ -21,5 +21,15 @@ const ListItem = ({
     </View>
   </TouchableOpacity>
 );
-
+ListItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  boardId: PropTypes.number.isRequired,
+  onLongPress: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
 export default withNavigation(ListItem);

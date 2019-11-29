@@ -11,17 +11,15 @@ const BoardList = ({ boards, onLongPress, selectedBoards }) => (
       numColumns={3}
       data={boards}
       extraData={selectedBoards}
-      renderItem={({ item: { id, name, thumbnailPhoto } }) => {
-        return (
-          <BoardThumbnail
-            id={id}
-            name={name}
-            thumbnailPhoto={thumbnailPhoto}
-            onLongPress={onLongPress}
-            isSelected={selectedBoards.indexOf(id) !== -1}
-          />
-        );
-      }}
+      renderItem={({ item: { id, name, thumbnailPhoto } }) => (
+        <BoardThumbnail
+          id={id}
+          name={name}
+          thumbnailPhoto={thumbnailPhoto}
+          onLongPress={onLongPress}
+          isSelected={selectedBoards.indexOf(id) !== -1}
+        />
+      )}
       keyExtractor={(board) => board.id}
     />
   </View>
@@ -37,8 +35,8 @@ BoardList.propTypes = {
   selectedBoards: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
-const mapStateToProps = state => ({
-  boards: state.boards
-})
+const mapStateToProps = (state) => ({
+  boards: state.boards,
+});
 
 export default connect(mapStateToProps)(BoardList);

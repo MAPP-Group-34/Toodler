@@ -23,23 +23,21 @@ const TaskList = ({
           description,
           listId,
         },
-      }) => {
-        return (
-          masterListId === listId
-            ? (
-              <TaskItem
-                isSelected={selectedTasks.indexOf(id) !== -1}
-                onLongPress={onLongPress}
-                listId={listId}
-                description={description}
-                isFinished={isFinished}
-                name={name}
-                id={id}
-              />
-            )
-            : <></>
-        );
-      }}
+      }) => (
+        masterListId === listId
+          ? (
+            <TaskItem
+              isSelected={selectedTasks.indexOf(id) !== -1}
+              onLongPress={onLongPress}
+              listId={listId}
+              description={description}
+              isFinished={isFinished}
+              name={name}
+              id={id}
+            />
+          )
+          : <></>
+      )}
       keyExtractor={(task) => task.id}
     />
   </View>

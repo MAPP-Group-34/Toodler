@@ -1,116 +1,119 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import BoardList from '../../components/BoardList';
 import AddModal from '../../components/AddBoardModal';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
-import data from '../../resources/data.json';
 import { addBoard, removeBoard } from '../../actions/boardActions';
-import { connect } from 'react-redux';
 
 class Boards extends React.Component {
-
-  state = {
-    isAddModalOpen: false,
-    selectedBoards: [],
-    thumbnailPhoto: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAddModalOpen: false,
+      selectedBoards: [],
+      thumbnailPhoto: '',
+    };
   }
 
-  async componentDidMount(){
-    const{addBoard} = this.props;
-    data.boards.map((board) => {
-      addBoard(board.name, board.thumbnailPhoto);
-    });
-    // const { boards } = this.state;
-    // if( boards.length === 0){
-    //   this.setState({ boards: data.boards});
-    // }
-  }
-
-<<<<<<< HEAD
-  onBoardLongPress(id){
-    const { selectedBoards } = this.state;
-=======
   onBoardLongPress(id) {
-    const { selectedBoards, boards } = this.state;
->>>>>>> 0cb70eefafba18c036c25d92c4c3d70a9ba3dbd5
+    const { selectedBoards } = this.state;
     if (selectedBoards.indexOf(id) !== -1) {
-      //the board is already within the list
+      // the board is already within the list
       this.setState({
-        selectedBoards: selectedBoards.filter(board => board !== id)
+        selectedBoards: selectedBoards.filter((board) => board !== id),
       });
     } else {
       // the board needs to be added
       this.setState({
-        selectedBoards: [ ...selectedBoards, id ]
+        selectedBoards: [...selectedBoards, id],
       });
     }
   }
 
   async deleteSelectedBoards() {
-    const{removeBoard} = this.props;
+    const { removeBoard } = this.props;
     const { selectedBoards } = this.state;
     removeBoard(selectedBoards);
     this.setState({
-        selectedBoards: [],
+      selectedBoards: [],
     });
   }
 
   async takePhoto() {
     const photo = await takePhoto();
-    if (photo.length > 0) { this.setState({ thumbnailPhoto: photo })}
+    if (photo.length > 0) { this.setState({ thumbnailPhoto: photo }); }
   }
 
-  async selectFromCameraRoll(){
+  async selectFromCameraRoll() {
     const photo = await selectFromCameraRoll();
-    if (photo.length > 0) { this.setState({ thumbnailPhoto: photo }) }
+    if (photo.length > 0) { this.setState({ thumbnailPhoto: photo }); }
   }
 
   async addBoard(name) {
-    const{isAddModalOpen, thumbnailPhoto} = this.state;
-    const{addBoard} = this.props;
+    const { thumbnailPhoto } = this.state;
+    const { addBoard } = this.props;
     this.setState({ isAddModalOpen: false });
     addBoard(name, thumbnailPhoto);
   }
 
   displayCaption() {
     const { selectedBoards } = this.state;
-    if (selectedBoards.length === 0) { return; }
+    if (selectedBoards.length !== 0) { return null; }
     let itemCaption = 'boards';
     if (selectedBoards.length === 1) {
-      itemCaption = 'boards';
+      itemCaption = 'board';
     }
-    return <Text style={{
-      fontWeight: 'bold',
-      fontSize: 32,
-      marginLeft: 20,
-      marginTop: 10,
-      marginBottom: 5
-    }}>{ selectedBoards.length } { itemCaption } selected</Text>;
+    return (
+      <Text style={{
+        fontWeight: 'bold',
+        fontSize: 32,
+        marginLeft: 20,
+        marginTop: 10,
+        marginBottom: 5,
+      }}
+      >
+        { selectedBoards.length }
+        { itemCaption }
+        {' '}
+        selected
+      </Text>
+    );
   }
 
   render() {
-    const{ selectedBoards, isAddModalOpen, name, url} = this.state;
-    return(
+    const {
+      selectedBoards, isAddModalOpen,
+    } = this.state;
+    return (
       <View style={{ flex: 1 }}>
         <Toolbar
-          onAdd={ () => this.setState({ isAddModalOpen: true }) }
+          onAdd={() => this.setState({ isAddModalOpen: true })}
           onRemove={() => this.deleteSelectedBoards()}
-          hasSelected={selectedBoards.length > 0}/>
+          hasSelected={selectedBoards.length > 0}
+        />
         { this.displayCaption() }
         <BoardList
           onLongPress={(id) => this.onBoardLongPress(id)}
-          selectedBoards={selectedBoards}/>
-          <AddModal
-              isOpen={ isAddModalOpen }
-              closeModal={ () => this.setState({ isAddModalOpen: false }) }
-              takePhoto={ () => this.takePhoto() }
-              onSubmit={ (name, url) => this.addBoard(name) }
-              selectFromCameraRoll={ () => this.selectFromCameraRoll() }
-              />
+          selectedBoards={selectedBoards}
+        />
+        <AddModal
+          isOpen={isAddModalOpen}
+          closeModal={() => this.setState({ isAddModalOpen: false })}
+          takePhoto={() => this.takePhoto()}
+          onSubmit={(name, url) => this.addBoard(name, url)}
+          selectFromCameraRoll={() => this.selectFromCameraRoll()}
+        />
       </View>
     );
   }
 }
+
+Boards.propTypes = {
+  addBoard: PropTypes.func.isRequired,
+  removeBoard: PropTypes.func.isRequired,
+};
 
 export default connect(null, { addBoard, removeBoard })(Boards);

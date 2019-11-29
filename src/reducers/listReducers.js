@@ -1,6 +1,7 @@
 import * as constants from '../constants';
+import data from '../resources/data.json';
 
-const lists = (state = [], action) => {
+const lists = (state = data.lists, action) => {
   switch (action.type) {
     case constants.ADD_LIST:
       return [

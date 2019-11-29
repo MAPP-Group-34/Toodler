@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Text } from 'react-native';
-import styles from './styles';
 import { AntDesign } from '@expo/vector-icons';
+import styles from './styles';
 
 const TaskItem = ({
   id, name, isFinished, description, listId, onLongPress, isSelected,
