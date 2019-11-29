@@ -10,24 +10,23 @@ const ListList = ({
 }) => (
   <View style={styles.listContainer}>
     <FlatList
-      numColumns={3}
+      numColumns={1}
       data={lists.filter((list) => list.boardId === selectedBoardId)}
       extraData={selectedLists}
       renderItem={({
         item: {
-          id, name, color, boardId,
+          id, name, color,
         },
       }) => (
         <ListItem
           id={id}
           name={name}
           color={color}
-          boardId={boardId}
           onLongPress={onLongPress}
           isSelected={selectedLists.indexOf(id) !== -1}
         />
       )}
-      keyExtractor={(list) => list.id}
+      keyExtractor={(list) => list.id.toString()}
     />
   </View>
 );

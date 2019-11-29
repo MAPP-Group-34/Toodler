@@ -14,3 +14,9 @@ export const removeBoard = (selectedBoards) => ({
   type: constants.REMOVE_BOARD,
   payload: selectedBoards,
 });
+
+export const updateBoard = (boardId, name, thumbnailPhoto) => ({
+  type: constants.UPDATE_BOARD,
+  id: boardId,
+  payload: { name, thumbnailPhoto },
+});

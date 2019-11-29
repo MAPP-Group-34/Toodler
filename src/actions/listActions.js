@@ -15,3 +15,9 @@ export const removeList = (selectedLists) => ({
   type: constants.REMOVE_LIST,
   payload: selectedLists,
 });
+
+export const updateList = (listId, name, color, boardId) => ({
+  type: constants.UPDATE_LIST,
+  id: listId,
+  payload: { name, color, boardId },
+});

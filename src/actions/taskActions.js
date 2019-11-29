@@ -17,3 +17,11 @@ export const removeTask = (selectedTasks) => ({
   type: constants.REMOVE_TASK,
   payload: selectedTasks,
 });
+
+export const updateTask = (taskId, name, description, isFinished, listId) => ({
+  type: constants.UPDATE_TASK,
+  id: taskId,
+  payload: {
+    name, description, isFinished, listId,
+  },
+});

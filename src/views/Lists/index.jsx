@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import ListList from '../../components/ListList';
 import AddModal from '../../components/AddListModal';
-import { addList, removeList } from '../../actions/listActions';
+import { addList, removeList, updateList } from '../../actions/listActions';
 
 class Lists extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Lists extends React.Component {
       selectedBoardId,
       selectedLists: [],
       isAddModalOpen: false,
+      isEditModalOpen: false,
     };
   }
 
@@ -34,31 +35,6 @@ class Lists extends React.Component {
     }
   }
 
-  displayCaption() {
-    const { selectedLists } = this.state;
-    if (selectedLists.length === 0) { return null; }
-
-    let itemCaption = 'lists';
-    if (selectedLists.length === 1) {
-      itemCaption = 'lists';
-    }
-    return (
-      <Text style={{
-        fontWeight: 'bold',
-        fontSize: 32,
-        marginLeft: 20,
-        marginTop: 10,
-        marginBottom: 5,
-      }}
-      >
-        { selectedLists.length }
-        { itemCaption }
-        {' '}
-        selected
-      </Text>
-    );
-  }
-
   async deleteSelectedLists() {
     const { removeListFromState } = this.props;
     const { selectedLists } = this.state;
@@ -75,16 +51,32 @@ class Lists extends React.Component {
     this.setState({ isAddModalOpen: false });
   }
 
+  async editSelectedLists(name, color) {
+    const { selectedBoardId, selectedLists } = this.state;
+    const { updateListState } = this.props;
+    updateListState(selectedLists[0], name, color, selectedBoardId);
+    this.setState({
+      isEditModalOpen: false,
+      selectedLists: [],
+    });
+  }
+
   render() {
-    const { selectedLists, isAddModalOpen, selectedBoardId } = this.state;
+    const {
+      selectedLists,
+      isAddModalOpen,
+      selectedBoardId,
+      isEditModalOpen,
+    } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onRemove={() => this.deleteSelectedLists()}
+          onEdit={() => this.setState({ isEditModalOpen: true })}
           hasSelected={selectedLists.length > 0}
+          hasSelectedOne={selectedLists.length === 1}
         />
-        { this.displayCaption() }
         <ListList
           onLongPress={(id) => this.onListLongPress(id)}
           selectedLists={selectedLists}
@@ -96,6 +88,11 @@ class Lists extends React.Component {
           pickColor={() => this.pickColor()}
           onSubmit={(name, color) => this.addList(name, color)}
         />
+        <AddModal
+          isOpen={isEditModalOpen}
+          onSubmit={(name, color) => this.editSelectedLists(name, color)}
+          closeModal={() => this.setState({ isEditModalOpen: false })}
+        />
       </View>
     );
   }
@@ -104,10 +101,15 @@ class Lists extends React.Component {
 Lists.propTypes = {
   addListToState: PropTypes.func.isRequired,
   removeListFromState: PropTypes.func.isRequired,
+  updateListState: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect(null, { addListToState: addList, removeListFromState: removeList })(Lists);
+export default connect(null, {
+  addListToState: addList,
+  removeListFromState: removeList,
+  updateListState: updateList,
+})(Lists);

@@ -19,7 +19,7 @@ class AddBoardModal extends React.Component {
   render() {
     const { name } = this.state;
     const {
-      isOpen, closeModal, takePhoto, selectFromCameraRoll, onSubmit,
+      isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll,
     } = this.props;
     return (
       <Modal
@@ -62,9 +62,9 @@ class AddBoardModal extends React.Component {
 AddBoardModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   selectFromCameraRoll: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default AddBoardModal;

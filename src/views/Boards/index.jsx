@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import BoardList from '../../components/BoardList';
 import AddModal from '../../components/AddBoardModal';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
-import { addBoard, removeBoard } from '../../actions/boardActions';
+import { addBoard, removeBoard, updateBoard } from '../../actions/boardActions';
 
 class Boards extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class Boards extends React.Component {
       isAddModalOpen: false,
       selectedBoards: [],
       thumbnailPhoto: '',
+      isEditModalOpen: false,
     };
   }
 
@@ -62,42 +63,32 @@ class Boards extends React.Component {
     });
   }
 
-  displayCaption() {
-    const { selectedBoards } = this.state;
-    if (selectedBoards.length === 0) { return null; }
-    let itemCaption = 'boards';
-    if (selectedBoards.length === 1) {
-      itemCaption = 'board';
-    }
-    return (
-      <Text style={{
-        fontWeight: 'bold',
-        fontSize: 32,
-        marginLeft: 20,
-        marginTop: 10,
-        marginBottom: 5,
-      }}
-      >
-        { selectedBoards.length }
-        { itemCaption }
-        {' '}
-        selected
-      </Text>
-    );
+  async editSelectedBoards(name) {
+    const { thumbnailPhoto, selectedBoards } = this.state;
+    const { updateBoardState } = this.props;
+    updateBoardState(selectedBoards[0], name, thumbnailPhoto);
+    this.setState({
+      isEditModalOpen: false,
+      thumbnailPhoto: '',
+      selectedBoards: [],
+    });
   }
 
   render() {
     const {
-      selectedBoards, isAddModalOpen,
+      selectedBoards,
+      isAddModalOpen,
+      isEditModalOpen,
     } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onRemove={() => this.deleteSelectedBoards()}
+          onEdit={() => this.setState({ isEditModalOpen: true })}
           hasSelected={selectedBoards.length > 0}
+          hasSelectedOne={selectedBoards.length === 1}
         />
-        { this.displayCaption() }
         <BoardList
           onLongPress={(id) => this.onBoardLongPress(id)}
           selectedBoards={selectedBoards}
@@ -106,7 +97,14 @@ class Boards extends React.Component {
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({ isAddModalOpen: false })}
           takePhoto={() => this.takePhoto()}
-          onSubmit={(name, url) => this.addBoard(name, url)}
+          onSubmit={(name) => this.addBoard(name)}
+          selectFromCameraRoll={() => this.selectFromCameraRoll()}
+        />
+        <AddModal
+          isOpen={isEditModalOpen}
+          onSubmit={(name) => this.editSelectedBoards(name)}
+          closeModal={() => this.setState({ isEditModalOpen: false })}
+          takePhoto={() => this.takePhoto()}
           selectFromCameraRoll={() => this.selectFromCameraRoll()}
         />
       </View>
@@ -117,9 +115,11 @@ class Boards extends React.Component {
 Boards.propTypes = {
   addBoardToState: PropTypes.func.isRequired,
   removeBoardFromState: PropTypes.func.isRequired,
+  updateBoardState: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
   addBoardToState: addBoard,
   removeBoardFromState: removeBoard,
+  updateBoardState: updateBoard,
 })(Boards);

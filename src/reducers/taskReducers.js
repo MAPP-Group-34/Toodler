@@ -1,7 +1,9 @@
+import update from 'immutability-helper';
 import * as constants from '../constants';
 import data from '../resources/data.json';
 
 const tasks = (state = data.tasks, action) => {
+  let index = -1;
   switch (action.type) {
     case constants.ADD_TASK:
       return [
@@ -16,6 +18,19 @@ const tasks = (state = data.tasks, action) => {
       ];
     case constants.REMOVE_TASK:
       return state.filter((task) => action.payload.indexOf(task.id) === -1);
+    case constants.UPDATE_TASK:
+      index = state.findIndex((task) => task.id === action.id);
+      return update(state, {
+        [index]: {
+          $set: {
+            id: action.id,
+            name: action.payload.name,
+            description: action.payload.description,
+            isFinished: action.payload.isFinished,
+            listId: action.payload.listId,
+          },
+        },
+      });
     default: return state;
   }
 };

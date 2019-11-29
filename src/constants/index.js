@@ -4,3 +4,6 @@ export const ADD_TASK = 'ADD_TASK';
 export const REMOVE_BOARD = 'REMOVE_BOARD';
 export const REMOVE_LIST = 'REMOVE_LIST';
 export const REMOVE_TASK = 'REMOVE_TASK';
+export const UPDATE_BOARD = 'UPDATE_BOARD';
+export const UPDATE_LIST = 'UPDATE_LIST';
+export const UPDATE_TASK = 'UPDATE_TASK';
