@@ -3,6 +3,8 @@ import { View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
 import ListList from '../../components/ListList';
 import AddModal from '../../components/AddListModal';
+import { addList, removeList } from '../../actions/listActions';
+import { connect } from 'react-redux';
 import data from '../../resources/data.json';
 
 class Lists extends React.Component {
@@ -10,20 +12,24 @@ class Lists extends React.Component {
   state = {
     lists: [],
     selectedLists: [],
-    id: 8,
     isAddModalOpen: false,
-    loadingBoards: false,
     color: '',
     boardId: -1,
   }
   async componentDidMount() {
-    const { lists } = this.state;
     const { navigation } = this.props;
     const selectedBoardId = navigation.getParam('selectedBoardId', -1);
-    this.setState({
-      lists: data.lists.filter(list => list.boardId === selectedBoardId),
-      boardId: selectedBoardId,
+    const{addList} = this.props;
+    data.lists.map((list) => {
+      addList(list.name, list.color, list.boardId);
     });
+    // const { lists } = this.state;
+    // const { navigation } = this.props;
+    // const selectedBoardId = navigation.getParam('selectedBoardId', -1);
+    // this.setState({
+    //   lists: data.lists.filter(list => list.boardId === selectedBoardId),
+    //   boardId: selectedBoardId,
+    // });
   }
 
   displayCaption() {
@@ -62,18 +68,11 @@ class Lists extends React.Component {
 
   }
 
-  async pickColor(){
-
-  }
-
   async addList(name, color) {
-    const{isAddModalOpen, lists, id, boardId} = this.state;
-    const newId = id + 1;
-    const newList = {"id": newId,
-                      "name": name,
-                      "color": color,
-                      "boardId": boardId,};
-    this.setState({ lists: [ ...lists, newList],isAddModalOpen: false, id: newId});
+    const{isAddModalOpen, boardId} = this.state;
+    const{addList} = this.props;
+    addList(name, color, boardId);
+    this.setState({ isAddModalOpen: false });
   }
 
   render() {
@@ -87,7 +86,6 @@ class Lists extends React.Component {
       { this.displayCaption() }
       <ListList
         onLongPress={(id) => this.onListLongPress(id)}
-        lists={lists}
         selectedLists={selectedLists}/>
       <AddModal
           isOpen={ isAddModalOpen }
@@ -100,4 +98,4 @@ class Lists extends React.Component {
   }
 }
 
-export default Lists;
+export default connect(null, { addList, removeList })(Lists);

@@ -3,8 +3,6 @@ import * as constants from '../constants';
 const boards = (state = [], action) => {
   switch (action.type) {
     case constants.ADD_BOARD:
-
-      console.log(action);
       return [
         ...state,
         {
@@ -13,6 +11,8 @@ const boards = (state = [], action) => {
           thumbnailPhoto: action.payload.thumbnailPhoto,
         },
       ];
+    case constants.REMOVE_BOARD:
+      return state.filter((board) => action.payload.indexOf(board.id) === -1);
     default: return state;
   }
 };

@@ -1,8 +1,13 @@
 import * as constants from '../constants';
 
-let nextBoardId = 4;
-export const addBoard = (id, name, thumbnailPhoto) => ({
+let nextBoardId = 1;
+export const addBoard = (name, thumbnailPhoto) => ({
   type: constants.ADD_BOARD,
   id: nextBoardId++,
-  payload: { id, name, thumbnailPhoto },
+  payload: { name, thumbnailPhoto },
+});
+
+export const removeBoard = (selectedBoards) => ({
+  type: constants.REMOVE_BOARD,
+  payload: selectedBoards,
 });

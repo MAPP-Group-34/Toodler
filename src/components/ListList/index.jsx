@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import ListItem from '../ListItem';
 import styles from './styles';
 
@@ -31,4 +32,8 @@ const ListList = ({
   </View>
 );
 
-export default ListList;
+const mapStateToProps = (state) => ({
+  lists: state.lists,
+});
+
+export default connect(mapStateToProps)(ListList);

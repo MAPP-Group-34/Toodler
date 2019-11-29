@@ -5,29 +5,30 @@ import BoardList from '../../components/BoardList';
 import AddModal from '../../components/AddBoardModal';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import data from '../../resources/data.json';
-import { addBoard } from '../../actions/boardActions';
+import { addBoard, removeBoard } from '../../actions/boardActions';
 import { connect } from 'react-redux';
 
 class Boards extends React.Component {
 
   state = {
-    boards: [],
     isAddModalOpen: false,
     selectedBoards: [],
-    loadingBoards: false,
-    id: 3,
     thumbnailPhoto: '',
   }
 
   async componentDidMount(){
-    const { boards } = this.state;
-    if( boards.length === 0){
-      this.setState({ boards: data.boards});
-    }
+    const{addBoard} = this.props;
+    data.boards.map((board) => {
+      addBoard(board.name, board.thumbnailPhoto);
+    });
+    // const { boards } = this.state;
+    // if( boards.length === 0){
+    //   this.setState({ boards: data.boards});
+    // }
   }
 
   onBoardLongPress(id){
-    const { selectedBoards, boards } = this.state;
+    const { selectedBoards } = this.state;
     if (selectedBoards.indexOf(id) !== -1) {
       //the board is already within the list
       this.setState({
@@ -42,13 +43,11 @@ class Boards extends React.Component {
   }
 
   async deleteSelectedBoards() {
-    const { selectedBoards, boards } = this.state;
-    this.setState({ loadingBoards: true })
+    const{removeBoard} = this.props;
+    const { selectedBoards } = this.state;
+    removeBoard(selectedBoards);
     this.setState({
         selectedBoards: [],
-        // Only retrieve boards which were NOT part of the selected boards list
-        boards: boards.filter(board => selectedBoards.indexOf(board.id) === -1),
-        loadingBoards: false
     });
   }
 
@@ -63,18 +62,14 @@ class Boards extends React.Component {
   }
 
   async addBoard(name) {
-    const{isAddModalOpen, boards, id, thumbnailPhoto} = this.state;
+    const{isAddModalOpen, thumbnailPhoto} = this.state;
     const{addBoard} = this.props;
-    const newId = id + 1;
-    const newBoard = {"id": newId,
-                      "name": name,
-                      "thumbnailPhoto": thumbnailPhoto,};
-    this.setState({ boards: [ ...boards, newBoard],isAddModalOpen: false, id: newId});
-    addBoard(newId, name, thumbnailPhoto);
+    this.setState({ isAddModalOpen: false });
+    addBoard(name, thumbnailPhoto);
   }
 
   displayCaption() {
-    const { selectedBoards, boards } = this.state;
+    const { selectedBoards } = this.state;
     if (selectedBoards.length === 0) { return; }
     let itemCaption = 'boards';
     if (selectedBoards.length === 1) {
@@ -90,7 +85,7 @@ class Boards extends React.Component {
   }
 
   render() {
-    const{ selectedBoards, boards, isAddModalOpen, name, url} = this.state;
+    const{ selectedBoards, isAddModalOpen, name, url} = this.state;
     return(
       <View style={{ flex: 1 }}>
         <Toolbar
@@ -100,7 +95,6 @@ class Boards extends React.Component {
         { this.displayCaption() }
         <BoardList
           onLongPress={(id) => this.onBoardLongPress(id)}
-          // boards={boards}
           selectedBoards={selectedBoards}/>
           <AddModal
               isOpen={ isAddModalOpen }
@@ -114,4 +108,4 @@ class Boards extends React.Component {
   }
 }
 
-export default connect(null, { addBoard })(Boards);
+export default connect(null, { addBoard, removeBoard })(Boards);
