@@ -2,9 +2,10 @@ import React from 'react';
 import {
   View, Text, Image, TouchableHighlight,
 } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import logo from '../../resources/baby.png';
 import styles from './styles';
-import { connect } from 'react-redux';
 
 const Main = ({ navigation: { navigate } }) => (
   <View style={styles.container}>
@@ -16,15 +17,13 @@ const Main = ({ navigation: { navigate } }) => (
     >
       <Text style={styles.buttonText}>Boards</Text>
     </TouchableHighlight>
-    <Text> Hi </Text>
-    <TouchableHighlight
-      style={styles.button}
-      onPress={() => { navigate('TaskTest'); }}
-    >
-      <Text style={styles.buttonText}>TaskTests</Text>
-    </TouchableHighlight>
-    <Image style={styles.logo} source={logo} />
   </View>
 );
+
+Main.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default connect()(Main);

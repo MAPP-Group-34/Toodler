@@ -54,7 +54,7 @@ class Lists extends React.Component {
         { selectedLists.length }
         { itemCaption }
         {' '}
-selected
+        selected
       </Text>
     );
   }
@@ -106,6 +106,7 @@ Lists.propTypes = {
   removeList: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
   }).isRequired,
 };
 

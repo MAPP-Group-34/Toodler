@@ -1,26 +1,26 @@
 import React from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Taskbar from '../../components/TaskBar';
 import TaskList from '../../components/TaskList';
-import data from '../../resources/data.json';
 import AddModal from '../../components/AddTaskModal';
 import EditModal from '../../components/EditTaskModal';
+import { addTask, removeTask } from '../../actions/taskActions';
 
 class Tasks extends React.Component {
-  state = {
-    tasks: [],
-    selectedTasks: [],
-    isAddModalOpen: false,
-    isEditModalOpen: false,
-    currentList: 1,
+  constructor(props) {
+    super(props);
+    const { navigation } = this.props;
+    const selectedListId = navigation.getParam('selectedListId', -1);
+    this.state = {
+      tasks: [],
+      selectedTasks: [],
+      isAddModalOpen: false,
+      isEditModalOpen: false,
+      selectedListId,
+    };
   }
-
-  async componentDidMount() {
-    const iTasks = data.tasks;
-    this.setState({ tasks: iTasks });
-  }
-
 
   onTaskLongPress(id) {
     const { selectedTasks } = this.state;
@@ -31,43 +31,21 @@ class Tasks extends React.Component {
       // Add the new image
       this.setState({ selectedTasks: [...selectedTasks, id] });
     }
-
-  }
-
-  getNewId() {
-    const { tasks } = this.state;
-    const newId = 0;
-    const currentTail = tasks.length;
-    const lastElement = tasks[currentTail - 1].id;
-    if (lastElement > newId) {
-      return lastElement + 1;
-    }
-    return 0;
   }
 
   async addTask(name, description, isFinished) {
-    const {
-      tasks,
-      currentList,
-      isAddModalOpen,
-    } = this.state;
-    const newId = this.getNewId();
-    const newTask = {
-      id: newId,
-      name,
-      description,
-      isFinished,
-      listId: currentList,
-    };
-    this.setState({ tasks: [...tasks, newTask], isAddModalOpen: false });
+    const { selectedListId } = this.state;
+    const { addTask } = this.props;
+    addTask(name, description, isFinished, selectedListId);
+    this.setState({ isAddModalOpen: false });
   }
 
   async deleteSelected() {
-    const { selectedTasks, tasks } = this.state;
+    const { removeTask } = this.props;
+    const { selectedTasks } = this.state;
+    removeTask(selectedTasks);
     this.setState({
       selectedTasks: [],
-      // Only retrieve boards which were NOT part of the selected boards list
-      tasks: tasks.filter((task) => selectedTasks.indexOf(task.id) === -1),
     });
   }
 
@@ -79,13 +57,12 @@ class Tasks extends React.Component {
 
   render() {
     const {
-      tasks,
-      currentList,
+      selectedListId,
       selectedTasks,
       isAddModalOpen,
       isEditModalOpen,
     } = this.state;
-    //console.log(this.state);
+    // console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <Taskbar
@@ -95,19 +72,34 @@ class Tasks extends React.Component {
           hasSelectedElement={selectedTasks.length > 0}
         />
         <TaskList
-          tasks={tasks}
-          masterListId={currentList}
+          masterListId={selectedListId}
           selectedTasks={selectedTasks}
           onLongPress={(id) => this.onTaskLongPress(id)}
         />
         <AddModal
           isOpen={isAddModalOpen}
-          onSubmit={(name, description, isFinished) => this.addTask(name, description, isFinished)}
+          onSubmit={(
+            name,
+            description,
+            isFinished,
+          ) => this.addTask(
+            name,
+            description,
+            isFinished,
+          )}
           closeModal={() => this.setState({ isAddModalOpen: false })}
         />
         <AddModal
           isOpen={isEditModalOpen}
-          onSubmit={(name, description, isFinished) => this.editSelected(name, description, isFinished)}
+          onSubmit={(
+            name,
+            description,
+            isFinished,
+          ) => this.editSelected(
+            name,
+            description,
+            isFinished,
+          )}
           closeModal={() => this.setState({ isEditModalOpen: false })}
         />
       </View>
@@ -116,12 +108,11 @@ class Tasks extends React.Component {
 }
 
 Tasks.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    listId: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    isFinished: PropTypes.bool.isRequired,
-  })).isRequired,
+  addTask: PropTypes.func.isRequired,
+  removeTask: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
 };
-export default Tasks;
+export default connect(null, { addTask, removeTask })(Tasks);

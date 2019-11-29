@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TaskItem from '../TaskItem';
 import styles from './styles';
@@ -43,6 +44,10 @@ const TaskList = ({
   </View>
 );
 
+const mapStateToProps = (state) => ({
+  tasks: state.tasks,
+});
+
 TaskList.propTypes = {
   masterListId: PropTypes.number.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.shape({
@@ -56,4 +61,4 @@ TaskList.propTypes = {
   selectedTasks: PropTypes.number,
 };
 
-export default TaskList;
+export default connect(mapStateToProps)(TaskList);
