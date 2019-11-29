@@ -47,7 +47,10 @@ class AddBoardModal extends React.Component {
         </View>
         <TouchableHighlight
           style={styles.button}
-          onPress={() => { onSubmit(name); }}
+          onPress={() => {
+            this.setState({ name: '' });
+            onSubmit(name);
+          }}
         >
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>

@@ -34,9 +34,9 @@ class Boards extends React.Component {
   }
 
   async deleteSelectedBoards() {
-    const { removeBoard } = this.props;
+    const { removeBoardFromState } = this.props;
     const { selectedBoards } = this.state;
-    removeBoard(selectedBoards);
+    removeBoardFromState(selectedBoards);
     this.setState({
       selectedBoards: [],
     });
@@ -54,9 +54,12 @@ class Boards extends React.Component {
 
   async addBoard(name) {
     const { thumbnailPhoto } = this.state;
-    const { addBoard } = this.props;
-    this.setState({ isAddModalOpen: false });
-    addBoard(name, thumbnailPhoto);
+    const { addBoardToState } = this.props;
+    addBoardToState(name, thumbnailPhoto);
+    this.setState({
+      isAddModalOpen: false,
+      thumbnailPhoto: '',
+    });
   }
 
   displayCaption() {
@@ -112,8 +115,11 @@ class Boards extends React.Component {
 }
 
 Boards.propTypes = {
-  addBoard: PropTypes.func.isRequired,
-  removeBoard: PropTypes.func.isRequired,
+  addBoardToState: PropTypes.func.isRequired,
+  removeBoardFromState: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addBoard, removeBoard })(Boards);
+export default connect(null, {
+  addBoardToState: addBoard,
+  removeBoardFromState: removeBoard,
+})(Boards);

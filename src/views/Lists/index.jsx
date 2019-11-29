@@ -60,9 +60,9 @@ class Lists extends React.Component {
   }
 
   async deleteSelectedLists() {
-    const { removeList } = this.props;
+    const { removeListFromState } = this.props;
     const { selectedLists } = this.state;
-    removeList(selectedLists);
+    removeListFromState(selectedLists);
     this.setState({
       selectedLists: [],
     });
@@ -70,8 +70,8 @@ class Lists extends React.Component {
 
   async addList(name, color) {
     const { selectedBoardId } = this.state;
-    const { addList } = this.props;
-    addList(name, color, selectedBoardId);
+    const { addListToState } = this.props;
+    addListToState(name, color, selectedBoardId);
     this.setState({ isAddModalOpen: false });
   }
 
@@ -102,12 +102,12 @@ class Lists extends React.Component {
 }
 
 Lists.propTypes = {
-  addList: PropTypes.func.isRequired,
-  removeList: PropTypes.func.isRequired,
+  addListToState: PropTypes.func.isRequired,
+  removeListFromState: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect(null, { addList, removeList })(Lists);
+export default connect(null, { addListToState: addList, removeListFromState: removeList })(Lists);

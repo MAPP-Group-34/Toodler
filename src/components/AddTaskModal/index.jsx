@@ -2,6 +2,7 @@ import React from 'react';
 import {
   TouchableHighlight, TextInput, Text, CheckBox,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import styles from './styles';
 
@@ -18,10 +19,13 @@ class AddBoardModal extends React.Component {
 
   render() {
     const { name, description, isFinished } = this.state;
+    const {
+      isOpen, closeModal, onSubmit,
+    } = this.props;
     return (
       <Modal
-        isOpen={this.props.isOpen}
-        closeModal={this.props.closeModal}
+        isOpen={isOpen}
+        closeModal={closeModal}
       >
         <TextInput
           onChangeText={(text) => this.setState({ name: text })}
@@ -33,12 +37,19 @@ class AddBoardModal extends React.Component {
         />
         <CheckBox
           style={styles.checkbox}
-          checked={this.state.isFinished}
-          onPress={() => this.setState({ checked: !this.state.isFinished })}
+          checked={isFinished}
+          onPress={() => this.setState({ isFinished: !isFinished })}
         />
         <TouchableHighlight
           style={styles.button}
-          onPress={() => { this.props.onSubmit(name, description, isFinished); }}
+          onPress={() => {
+            this.setState({
+              name: '',
+              description: '',
+              isFinished: false,
+            });
+            onSubmit(name, description, isFinished);
+          }}
         >
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
@@ -46,5 +57,11 @@ class AddBoardModal extends React.Component {
     );
   }
 }
+
+AddBoardModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default AddBoardModal;
