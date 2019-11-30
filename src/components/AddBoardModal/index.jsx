@@ -1,11 +1,16 @@
 import React from 'react';
 import {
-  TouchableHighlight, TextInput, Text, TouchableOpacity, View,
+  TouchableHighlight,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
 import styles from './styles';
+import defaultStyles from '../../styles';
 
 
 class AddBoardModal extends React.Component {
@@ -26,14 +31,14 @@ class AddBoardModal extends React.Component {
         isOpen={isOpen}
         closeModal={closeModal}
       >
-        <Text style={styles.titleText}>
+        <Text style={defaultStyles.modalTitleText}>
           Enter the desired title for this board
         </Text>
         <TextInput
           onChangeText={(text) => this.setState({ name: text })}
           placeholder="My board name"
           maxLength={29}
-          style={styles.input}
+          style={defaultStyles.textInput}
         />
         <View
           style={styles.icons}
@@ -46,13 +51,13 @@ class AddBoardModal extends React.Component {
           </TouchableOpacity>
         </View>
         <TouchableHighlight
-          style={styles.button}
+          style={defaultStyles.button}
           onPress={() => {
             this.setState({ name: '' });
             onSubmit(name);
           }}
         >
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={defaultStyles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </Modal>
     );

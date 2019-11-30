@@ -1,12 +1,12 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import { ColorPicker, toHsv, fromHsv } from 'react-native-color-picker'
+import React from 'react';
+import { View, Text } from 'react-native';
+import { ColorPicker, toHsv, fromHsv } from 'react-native-color-picker';
 
 export class ExampleControlledVertical extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { color: toHsv('green') }
-    this.onColorChange = this.onColorChange.bind(this)
+    super(props);
+    this.state = { color: toHsv('green') };
+    this.onColorChange = this.onColorChange.bind(this);
   }
 
   onColorChange(color) {
@@ -16,16 +16,20 @@ export class ExampleControlledVertical extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, padding: 1}}>
-        <Text style={{color: 'white', fontSize: 20, widht:500, height: 1 }}>-------------------------</Text>
+      <View style={{ flex: 1, padding: 1 }}>
+        <Text style={{
+          color: 'white', fontSize: 20, widht: 500, height: 1,
+        }}
+        >
+-------------------------
+        </Text>
         <ColorPicker
           color={this.state.color}
           onColorChange={this.onColorChange}
           hideSliders
-          style={{flex: 6, widht:500, height: 500}}
+          style={{ flex: 6, widht: 500, height: 500 }}
         />
       </View>
-    )
+    );
   }
-
 }

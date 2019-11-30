@@ -1,6 +1,6 @@
 import * as constants from '../constants';
 
-let nextTaskId = 1;
+let nextTaskId = 16;
 
 export const addTask = (name, description, isFinished, listId) => {
   nextTaskId += 1;
@@ -25,11 +25,14 @@ export const updateTask = (taskId, name, description, isFinished, listId) => ({
     name, description, isFinished, listId,
   },
 });
-
 export const moveTask = (taskId, listId) => ({
   type: constants.MOVE_TASK,
   id: taskId,
   payload: {
     listId,
   },
+});
+export const updateIsFinished = (taskId) => ({
+  type: constants.UPDATE_TASK_IS_FINISHED,
+  id: taskId,
 });

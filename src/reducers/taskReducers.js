@@ -44,6 +44,19 @@ const tasks = (state = data.tasks, action) => {
           },
         },
       });
+    case constants.UPDATE_TASK_IS_FINISHED:
+      index = state.findIndex((task) => task.id === action.id);
+      return update(state, {
+        [index]: {
+          $set: {
+            id: state[index].id,
+            name: state[index].name,
+            description: state[index].description,
+            isFinished: !state[index].isFinished,
+            listId: state[index].listId,
+          },
+        },
+      });
     default: return state;
   }
 };

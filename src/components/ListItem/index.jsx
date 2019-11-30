@@ -11,7 +11,7 @@ const ListItem = ({
 }) => (
   <TouchableOpacity
     onLongPress={() => onLongPress(id)}
-    onPress={() => navigate('Tasks', { selectedListId: id })}
+    onPress={() => navigate('Tasks', { selectedListId: id, backgroundColor: color })}
   >
     <View style={[{ opacity: isSelected ? 0.5 : 1, backgroundColor: color }, styles.contatiner]}>
       <Text style={styles.title}>{name}</Text>

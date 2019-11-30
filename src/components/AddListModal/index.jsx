@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
-import styles from './styles';
+import defaultStyles from '../../styles';
 
 
 class AddListModal extends React.Component {
@@ -31,14 +31,14 @@ class AddListModal extends React.Component {
         isOpen={isOpen}
         closeModal={closeModal}
       >
-        <Text style={styles.titleText}>
-          Enter the desired title for this board
+        <Text style={defaultStyles.modalTitleText}>
+          Enter the desired title for this list
         </Text>
         <TextInput
           onChangeText={(text) => this.setState({ name: text })}
-          placeholder="My board name"
+          placeholder="My list name"
           maxLength={29}
-          style={styles.input}
+          style={defaultStyles.textInput}
         />
         <View style={{ flexDirection: 'row' }}>
           <Picker
@@ -48,7 +48,6 @@ class AddListModal extends React.Component {
           >
             <Picker.Item label="White" value="#FFFFFF" />
             <Picker.Item label="Gray" value="#808080" />
-            <Picker.Item label="Black" value="#000000" />
             <Picker.Item label="Red" value="#FF0000" />
             <Picker.Item label="Maroon" value="#800000" />
             <Picker.Item label="Yellow" value="#FFFF00" />
@@ -63,7 +62,7 @@ class AddListModal extends React.Component {
           <View style={{ height: 50, width: 50, backgroundColor: color }} />
         </View>
         <TouchableHighlight
-          style={styles.button}
+          style={defaultStyles.button}
           onPress={() => {
             this.setState({
               name: '',
@@ -72,7 +71,7 @@ class AddListModal extends React.Component {
             onSubmit(name, color);
           }}
         >
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={defaultStyles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </Modal>
     );

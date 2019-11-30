@@ -8,7 +8,7 @@ import AddModal from '../../components/AddTaskModal';
 import MoveTasks from '../../components/MoveTasksButton';
 import MoveModal from '../../components/MoveModal';
 import {
-  addTask, removeTask, updateTask, moveTask,
+  addTask, removeTask, updateTask, moveTask, updateIsFinished,
 } from '../../actions/taskActions';
 
 class Tasks extends React.Component {
@@ -16,8 +16,10 @@ class Tasks extends React.Component {
     super(props);
     const { navigation } = this.props;
     const selectedListId = navigation.getParam('selectedListId', -1);
+    const color = navigation.getParam('backgroundColor', -1);
     this.state = {
       selectedListId,
+      color,
       selectedTasks: [],
       isAddModalOpen: false,
       isEditModalOpen: false,
@@ -32,6 +34,11 @@ class Tasks extends React.Component {
     } else {
       this.setState({ selectedTasks: [...selectedTasks, id] });
     }
+  }
+
+  async updateIsFinished(taskId) {
+    const { updateIsFinishedState } = this.props;
+    updateIsFinishedState(taskId);
   }
 
   async addTask(name, description, isFinished) {
@@ -81,6 +88,7 @@ class Tasks extends React.Component {
       isAddModalOpen,
       isEditModalOpen,
       isMoveModalOpen,
+      color,
     } = this.state;
     // console.log(this.state);
     return (
@@ -94,8 +102,10 @@ class Tasks extends React.Component {
         />
         <TaskList
           masterListId={selectedListId}
+          color={color}
           selectedTasks={selectedTasks}
           onLongPress={(id) => this.onTaskLongPress(id)}
+          onChangeIsFinished={(id) => this.updateIsFinished(id)}
         />
         <AddModal
           isOpen={isAddModalOpen}
@@ -142,12 +152,15 @@ Tasks.propTypes = {
   removeTaskFromState: PropTypes.func.isRequired,
   updateTaskState: PropTypes.func.isRequired,
   moveTaskState: PropTypes.func.isRequired,
+  updateIsFinishedState: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
   }).isRequired,
 };
+
 export default connect(null, {
+  updateIsFinishedState: updateIsFinished,
   addTaskToState: addTask,
   removeTaskFromState: removeTask,
   updateTaskState: updateTask,

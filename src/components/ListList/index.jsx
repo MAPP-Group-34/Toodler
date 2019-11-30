@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import ListItem from '../ListItem';
-import styles from './styles';
 
 const ListList = ({
   lists, onLongPress, selectedLists, selectedBoardId,
 }) => (
-  <View style={styles.listContainer}>
+  <View>
     <FlatList
       numColumns={1}
       data={lists.filter((list) => list.boardId === selectedBoardId)}

@@ -1,6 +1,6 @@
 import * as constants from '../constants';
 
-let nextListId = 1;
+let nextListId = 8;
 
 export const addList = (name, color, boardId) => {
   nextListId += 1;
