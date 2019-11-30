@@ -2,17 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import BoardThumbnail from '../BoardTumbnail';
-import styles from './styles';
+import BoardItem from '../BoardItem';
 
 const BoardList = ({ boards, onLongPress, selectedBoards }) => (
-  <View style={styles.listContainer}>
+  <View>
     <FlatList
-      numColumns={3}
+      numColumns={2}
       data={boards}
       extraData={selectedBoards}
       renderItem={({ item: { id, name, thumbnailPhoto } }) => (
-        <BoardThumbnail
+        <BoardItem
           id={id}
           name={name}
           thumbnailPhoto={thumbnailPhoto}

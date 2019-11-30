@@ -1,29 +1,28 @@
 import { StyleSheet } from 'react-native';
-import { graniteGray } from '../../styles/colors';
+import { pinkish } from './colors';
 
 export default StyleSheet.create({
-  icon: {
-    fontSize: 60,
-    marginTop: 20,
-    marginBottom: 20,
+  textInput: {
+    borderColor: pinkish,
+    borderWidth: 2,
+    width: 200,
+    textAlign: 'center',
   },
   button: {
-    marginTop: 30,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
     borderColor: 'white',
     borderWidth: 2,
-    backgroundColor: graniteGray,
+    backgroundColor: pinkish,
   },
   buttonText: {
     color: 'white',
   },
-  checkbox: {
-    width: 30,
-    height: 30,
-    borderRadius: 5,
-    borderWidth: 2,
+  modalTitleText: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    textAlign: 'center',
   },
 });

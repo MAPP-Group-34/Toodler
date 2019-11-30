@@ -14,7 +14,7 @@ const TaskItem = ({
     onPress={() => onChangeIsFinished(id)}
   >
     <View style={styles.itemContainer}>
-      <View style={styles.testContainer}>
+      <View style={styles.textContainer}>
         <Text style={styles.title}>
           {name}
         </Text>
@@ -25,6 +25,7 @@ const TaskItem = ({
       <CheckBox
         right
         checked={isFinished}
+        onIconPress={() => onChangeIsFinished(id)}
       />
     </View>
   </TouchableOpacity>

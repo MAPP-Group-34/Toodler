@@ -3,7 +3,6 @@ import { View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TaskItem from '../TaskItem';
-import styles from './styles';
 
 const TaskList = ({
   tasks,
@@ -13,7 +12,7 @@ const TaskList = ({
   color,
   onChangeIsFinished,
 }) => (
-  <View style={styles.taskConatiner}>
+  <View>
     <FlatList
       numColumns={1}
       data={tasks}
