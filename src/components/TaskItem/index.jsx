@@ -4,18 +4,15 @@ import {
   View, TouchableOpacity, Text,
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 
 const TaskItem = ({
-  id, name, description, isFinished, onLongPress, isSelected, onChangeIsFinished,
+  id, name, description, isFinished, onLongPress, onChangeIsFinished,
 }) => (
-  <TouchableOpacity onLongPress={() => onLongPress(id)}>
-    {
-        isSelected
-          ? <AntDesign name="checkcircleo" style={styles.checkmark} />
-          : <></>
-      }
+  <TouchableOpacity
+    onLongPress={() => onLongPress(id)}
+    onPress={() => onChangeIsFinished(id)}
+  >
     <View style={styles.itemContainer}>
       <View style={styles.testContainer}>
         <Text style={styles.title}>
@@ -28,7 +25,6 @@ const TaskItem = ({
       <CheckBox
         right
         checked={isFinished}
-        onIconPress={() => onChangeIsFinished(id)}
       />
     </View>
   </TouchableOpacity>
@@ -41,7 +37,6 @@ TaskItem.propTypes = {
   isFinished: PropTypes.bool.isRequired,
   onLongPress: PropTypes.func.isRequired,
   onChangeIsFinished: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool.isRequired,
 };
 
 

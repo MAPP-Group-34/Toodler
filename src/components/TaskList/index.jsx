@@ -31,7 +31,6 @@ const TaskList = ({
         masterListId === listId
           ? (
             <TaskItem
-              isSelected={selectedTasks.indexOf(id) !== -1}
               onLongPress={onLongPress}
               description={description}
               isFinished={isFinished}
