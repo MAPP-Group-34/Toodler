@@ -48,7 +48,6 @@ class AddListModal extends React.Component {
           >
             <Picker.Item label="White" value="#FFFFFF" />
             <Picker.Item label="Gray" value="#808080" />
-            <Picker.Item label="Black" value="#000000" />
             <Picker.Item label="Red" value="#FF0000" />
             <Picker.Item label="Maroon" value="#800000" />
             <Picker.Item label="Yellow" value="#FFFF00" />

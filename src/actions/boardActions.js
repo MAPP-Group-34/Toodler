@@ -1,6 +1,6 @@
 import * as constants from '../constants';
 
-let nextBoardId = 1;
+let nextBoardId = 3;
 export const addBoard = (name, thumbnailPhoto) => {
   nextBoardId += 1;
   return {

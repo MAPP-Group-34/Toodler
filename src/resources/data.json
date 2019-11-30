@@ -71,14 +71,14 @@
             "id": 1,
             "name": "Van Gogh Museum",
             "description": "Take a walk in the musem of Van Gogh!",
-            "isFinished": false,
+            "isFinished": true,
             "listId": 1
         },
         {
             "id": 2,
             "name": "Sunflower fields",
             "description": "Want to see the sunflower fields in the Netherlands!",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 1
         },
         {
@@ -92,7 +92,7 @@
             "id": 4,
             "name": "Helicopter ride over Amsterdam",
             "description": "A breath-taking view over the infamous Amsterdam city in a helicopter",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 2
         },
         {
@@ -127,14 +127,14 @@
             "id": 9,
             "name": "Clean toilet",
             "description": "Mom says you need to clean the toilet!",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 5
         },
         {
             "id": 10,
             "name": "Vacuum the living room",
             "description": "The living room is a mess!",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 5
         },
         {
@@ -148,7 +148,7 @@
             "id": 12,
             "name": "Scuba diving in the Caribbean",
             "description": "Hire an instructor to learn how to dive!",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 6
         },
         {
@@ -162,7 +162,7 @@
             "id": 14,
             "name": "Trip to Japan",
             "description": "A picture wearing a samurai costume!",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 7
         },
         {
@@ -176,7 +176,7 @@
             "id": 16,
             "name": "Road trip to USA",
             "description": "From east coast to west coast!",
-            "isFinished": true,
+            "isFinished": false,
             "listId": 8
         },
     ]

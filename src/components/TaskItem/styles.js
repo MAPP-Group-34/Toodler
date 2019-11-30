@@ -11,14 +11,29 @@ export default StyleSheet.create({
     flex: 3,
     flexDirection: 'row',
   },
-  taskDescription: {
-    marginTop: 20,
-    width: 1000,
+  description: {
+    marginLeft: 10,
+    marginRight: 10,
+    textAlign: 'center',
+    fontSize: 12,
   },
   checkmark: {
     position: 'absolute',
     top: 15,
     right: 15,
     fontSize: 16,
+  },
+  title: {
+    marginLeft: 10,
+    marginRight: 10,
+    textAlign: 'left',
+    fontSize: 20,
+  },
+  textContainer: {
+    height: 100,
+  },
+  itemContainer: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
 });
