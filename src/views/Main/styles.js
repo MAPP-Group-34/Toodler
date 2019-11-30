@@ -12,9 +12,10 @@ export default StyleSheet.create({
   paragraph: {
     textAlign: 'center',
     color: 'white',
+    fontSize: 30,
   },
   button: {
-    marginTop: 30,
+    marginTop: 10,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
