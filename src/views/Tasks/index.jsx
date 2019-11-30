@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import TaskList from '../../components/TaskList';
 import AddModal from '../../components/AddTaskModal';
-import { addTask, removeTask, updateTask } from '../../actions/taskActions';
+import MoveTasks from '../../components/MoveTasksButton';
+import MoveModal from '../../components/MoveModal';
+import {
+  addTask, removeTask, updateTask, moveTask,
+} from '../../actions/taskActions';
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -17,6 +21,7 @@ class Tasks extends React.Component {
       selectedTasks: [],
       isAddModalOpen: false,
       isEditModalOpen: false,
+      isMoveModalOpen: false,
     };
   }
 
@@ -55,12 +60,27 @@ class Tasks extends React.Component {
     });
   }
 
+  async moveSelectedTasks(newListId) {
+    const { selectedTasks } = this.state;
+    const { moveTaskState } = this.props;
+    // let i;
+    // for (i = 0; i < selectedTasks.length; i + 1) {
+    //   moveTaskState(selectedTasks[i], newListId);
+    // }
+    moveTaskState(selectedTasks[0], newListId);
+    this.setState({
+      isMoveModalOpen: false,
+      selectedTasks: [],
+    });
+  }
+
   render() {
     const {
       selectedListId,
       selectedTasks,
       isAddModalOpen,
       isEditModalOpen,
+      isMoveModalOpen,
     } = this.state;
     // console.log(this.state);
     return (
@@ -103,6 +123,15 @@ class Tasks extends React.Component {
           )}
           closeModal={() => this.setState({ isEditModalOpen: false })}
         />
+        <MoveModal
+          isOpen={isMoveModalOpen}
+          onSubmit={(newListId) => this.moveSelectedTasks(newListId)}
+          closeModal={() => this.setState({ isMoveModalOpen: false })}
+        />
+        <MoveTasks
+          hasSelected={selectedTasks.length > 0}
+          onMove={() => this.setState({ isMoveModalOpen: true })}
+        />
       </View>
     );
   }
@@ -112,6 +141,7 @@ Tasks.propTypes = {
   addTaskToState: PropTypes.func.isRequired,
   removeTaskFromState: PropTypes.func.isRequired,
   updateTaskState: PropTypes.func.isRequired,
+  moveTaskState: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     getParam: PropTypes.func.isRequired,
@@ -121,4 +151,5 @@ export default connect(null, {
   addTaskToState: addTask,
   removeTaskFromState: removeTask,
   updateTaskState: updateTask,
+  moveTaskState: moveTask,
 })(Tasks);

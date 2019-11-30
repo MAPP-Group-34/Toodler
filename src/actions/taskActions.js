@@ -25,3 +25,11 @@ export const updateTask = (taskId, name, description, isFinished, listId) => ({
     name, description, isFinished, listId,
   },
 });
+
+export const moveTask = (taskId, listId) => ({
+  type: constants.MOVE_TASK,
+  id: taskId,
+  payload: {
+    listId,
+  },
+});
