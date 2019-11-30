@@ -33,6 +33,7 @@ const TaskList = ({
           name={name}
           id={id}
           onChangeIsFinished={onChangeIsFinished}
+          isSelected={selectedTasks.indexOf(id) !== -1}
         />
       )}
       keyExtractor={(task) => task.id.toString()}

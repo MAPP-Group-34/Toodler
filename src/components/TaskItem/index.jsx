@@ -7,13 +7,13 @@ import { CheckBox } from 'react-native-elements';
 import styles from './styles';
 
 const TaskItem = ({
-  id, name, description, isFinished, onLongPress, onChangeIsFinished,
+  id, name, description, isFinished, onLongPress, onChangeIsFinished, isSelected,
 }) => (
   <TouchableOpacity
     onLongPress={() => onLongPress(id)}
     onPress={() => onChangeIsFinished(id)}
   >
-    <View style={styles.itemContainer}>
+    <View style={[{ opacity: isSelected ? 0.5 : 1 }, styles.itemContainer]}>
       <View style={styles.textContainer}>
         <Text style={styles.title}>
           {name}
@@ -38,6 +38,7 @@ TaskItem.propTypes = {
   isFinished: PropTypes.bool.isRequired,
   onLongPress: PropTypes.func.isRequired,
   onChangeIsFinished: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
 
 
