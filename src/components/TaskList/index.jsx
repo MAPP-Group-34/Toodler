@@ -15,7 +15,7 @@ const TaskList = ({
   <View>
     <FlatList
       numColumns={1}
-      data={tasks}
+      data={tasks.filter((task) => task.listId === masterListId)}
       extraData={selectedTasks}
       style={{ backgroundColor: color }}
       renderItem={({
@@ -24,21 +24,16 @@ const TaskList = ({
           name,
           isFinished,
           description,
-          listId,
         },
       }) => (
-        masterListId === listId
-          ? (
-            <TaskItem
-              onLongPress={onLongPress}
-              description={description}
-              isFinished={isFinished}
-              name={name}
-              id={id}
-              onChangeIsFinished={onChangeIsFinished}
-            />
-          )
-          : <></>
+        <TaskItem
+          onLongPress={onLongPress}
+          description={description}
+          isFinished={isFinished}
+          name={name}
+          id={id}
+          onChangeIsFinished={onChangeIsFinished}
+        />
       )}
       keyExtractor={(task) => task.id.toString()}
     />
