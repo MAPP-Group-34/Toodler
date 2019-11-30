@@ -1,8 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width: winWidth } = Dimensions.get('window');
 
 export default StyleSheet.create({
   title: {
-    width: 185,
+    width: winWidth * 0.45,
     height: 60,
     marginLeft: 10,
     marginRight: 10,
@@ -10,8 +12,8 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    width: 185,
-    height: 185,
+    width: winWidth * 0.45,
+    height: winWidth * 0.45,
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
