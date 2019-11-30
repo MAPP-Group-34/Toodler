@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import TaskList from '../../components/TaskList';
 import AddModal from '../../components/AddTaskModal';
+import Header from '../../components/Header';
 import {
   addTask, removeTask, updateTask, updateIsFinished,
 } from '../../actions/taskActions';
@@ -81,6 +82,9 @@ class Tasks extends React.Component {
           onEdit={() => this.setState({ isEditModalOpen: true })}
           hasSelected={selectedTasks.length > 0}
           hasSelectedOne={selectedTasks.length === 1}
+        />
+        <Header
+          title="Tasks"
         />
         <TaskList
           masterListId={selectedListId}

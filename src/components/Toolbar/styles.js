@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 80,
+    height: 60,
     backgroundColor: purpleish,
   },
   toolbarAction: {

@@ -1,10 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import BoardList from '../../components/BoardList';
 import AddModal from '../../components/AddBoardModal';
+import Header from '../../components/Header';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import { addBoard, removeBoard, updateBoard } from '../../actions/boardActions';
 
@@ -56,11 +57,18 @@ class Boards extends React.Component {
   async addBoard(name) {
     const { thumbnailPhoto } = this.state;
     const { addBoardToState } = this.props;
-    addBoardToState(name, thumbnailPhoto);
-    this.setState({
-      isAddModalOpen: false,
-      thumbnailPhoto: '',
-    });
+    if (thumbnailPhoto === '') {
+      Alert.alert(
+        'A photo is is required!',
+        'You can add a photo by selecting the camera or albom icon',
+      );
+    } else {
+      addBoardToState(name, thumbnailPhoto);
+      this.setState({
+        isAddModalOpen: false,
+        thumbnailPhoto: '',
+      });
+    }
   }
 
   async editSelectedBoards(name) {
@@ -88,6 +96,9 @@ class Boards extends React.Component {
           onEdit={() => this.setState({ isEditModalOpen: true })}
           hasSelected={selectedBoards.length > 0}
           hasSelectedOne={selectedBoards.length === 1}
+        />
+        <Header
+          title="Boards"
         />
         <BoardList
           onLongPress={(id) => this.onBoardLongPress(id)}

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Toolbar from '../../components/Toolbar';
 import ListList from '../../components/ListList';
 import AddModal from '../../components/AddListModal';
+import Header from '../../components/Header';
 import { addList, removeList, updateList } from '../../actions/listActions';
 
 class Lists extends React.Component {
@@ -76,6 +77,9 @@ class Lists extends React.Component {
           onEdit={() => this.setState({ isEditModalOpen: true })}
           hasSelected={selectedLists.length > 0}
           hasSelectedOne={selectedLists.length === 1}
+        />
+        <Header
+          title="Lists"
         />
         <ListList
           onLongPress={(id) => this.onListLongPress(id)}
