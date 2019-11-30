@@ -1,6 +1,10 @@
 import React from 'react';
 import {
-  TouchableHighlight, TextInput, Text, TouchableOpacity, View,
+  TouchableHighlight,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
