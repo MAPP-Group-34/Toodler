@@ -1,18 +1,9 @@
 {
-  "packagerPort": 19001,
-<<<<<<< HEAD
-  "packagerPid": 510352,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 524348,
   "expoServerNgrokUrl": "https://vq-k36.anonymous.toodler.exp.direct",
   "packagerNgrokUrl": "https://packager.vq-k36.anonymous.toodler.exp.direct",
-  "ngrokPid": 522844
-=======
-  "packagerPid": 18956,
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://ax-f5a.anonymous.toodler.exp.direct",
-  "packagerNgrokUrl": "https://packager.ax-f5a.anonymous.toodler.exp.direct",
-  "ngrokPid": 18985
->>>>>>> 37b7254da900b4ef25c4dd28f0902f816c96f93d
+  "ngrokPid": 518616
 }

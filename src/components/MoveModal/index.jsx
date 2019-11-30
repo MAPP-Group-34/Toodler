@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from '../Modal';
-import styles from './styles';
+import defaultStyles from '../../styles';
 
 
 class AddBoardModal extends React.Component {
@@ -28,9 +28,10 @@ class AddBoardModal extends React.Component {
         <TextInput
           onChangeText={(text) => this.setState({ newListId: text })}
           placeholder="newListId"
+          style={defaultStyles.textInput}
         />
         <TouchableHighlight
-          style={styles.button}
+          style={defaultStyles.button}
           onPress={() => {
             this.setState({
               newListId: '',
@@ -38,7 +39,7 @@ class AddBoardModal extends React.Component {
             onSubmit(newListId);
           }}
         >
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={defaultStyles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </Modal>
     );
