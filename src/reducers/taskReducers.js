@@ -54,7 +54,7 @@ const tasks = (state = data.tasks, action) => {
             name: state[index].name,
             description: state[index].description,
             isFinished: state[index].isFinished,
-            listId: action.payload.listId,
+            listId: parseInt(action.payload.listId),
           },
         },
       });
